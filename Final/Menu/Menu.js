@@ -33,12 +33,6 @@ export default function Menu({ navigation }) {
       description: 'Okul etkinliklerini takip et'
     },
     {
-      title: 'Ayarlar',
-      icon: 'settings-outline',
-      screen: 'Ayarlar',
-      description: 'Uygulama ayarlarını düzenle'
-    },
-    {
       title: 'Sınav Takvimi',
       icon: 'pencil',
       screen: 'ExamSchedule',

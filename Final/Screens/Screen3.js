@@ -6,34 +6,625 @@ import * as Animatable from 'react-native-animatable';
 
 const { width } = Dimensions.get('window');
 
+// Mock teacher data
+const mockTeachers = [
+  {
+    id: 1,
+    name: "Ramazan ÇOBAN",
+    age: 42,
+    gender: "Erkek",
+    subjects: ["Bilişim Teknolojileri", "Müdür"],
+    years_of_experience: 18,
+    email: "ramazan.coban@garemtal.meb.k12.tr",
+    phone: "+90 555 100 0001",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 2,
+    name: "Meltem KARADAĞ",
+    age: 38,
+    gender: "Kadın",
+    subjects: ["Çocuk Gelişimi", "Müdür Yardımcısı"],
+    years_of_experience: 15,
+    email: "meltem.karadag@garemtal.meb.k12.tr",
+    phone: "+90 555 100 0002",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 3,
+    name: "Pelin ŞENDİL",
+    age: 35,
+    gender: "Kadın",
+    subjects: ["Çocuk Gelişimi", "Müdür Yardımcısı"],
+    years_of_experience: 12,
+    email: "pelin.sendil@garemtal.meb.k12.tr",
+    phone: "+90 555 100 0003",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 4,
+    name: "Harun GÜRSOY",
+    age: 45,
+    gender: "Erkek",
+    subjects: ["Bilişim Teknolojileri", "Yazılım Geliştirme"],
+    years_of_experience: 20,
+    email: "harun.gursoy@garemtal.meb.k12.tr",
+    phone: "+90 555 100 0004",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 5,
+    name: "Aslı GÜREL",
+    age: 40,
+    gender: "Kadın",
+    subjects: ["Bilişim Teknolojileri", "Veri Tabanı"],
+    years_of_experience: 16,
+    email: "asli.gurel@garemtal.meb.k12.tr",
+    phone: "+90 555 100 0005",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 6,
+    name: "Salih ACAR",
+    age: 43,
+    gender: "Erkek",
+    subjects: ["Bilişim Teknolojileri", "Yazılım Geliştirme"],
+    years_of_experience: 18,
+    email: "salih.acar@garemtal.meb.k12.tr",
+    phone: "+90 555 100 0006",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 7,
+    name: "Necmettin Alp AR",
+    age: 50,
+    gender: "Erkek",
+    subjects: ["Bilişim Teknolojileri", "Yazılım Geliştirme"],
+    years_of_experience: 25,
+    email: "necmettin.alp@garemtal.meb.k12.tr",
+    phone: "+90 555 100 0007",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 8,
+    name: "Ebru ŞAHİN",
+    age: 37,
+    gender: "Kadın",
+    subjects: ["Bilişim Teknolojileri", "Yazılım Geliştirme",],
+    years_of_experience: 14,
+    email: "ebru.sahin@garemtal.meb.k12.tr",
+    phone: "+90 555 100 0008",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 9,
+    name: "Özlem BAYRAM",
+    age: 39,
+    gender: "Kadın",
+    subjects: ["Bilişim Teknolojileri", "Yazılım Geliştirme"],
+    years_of_experience: 15,
+    email: "ozlem.bayram@garemtal.meb.k12.tr",
+    phone: "+90 555 100 0009",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 10,
+    name: "Sinan VURAL",
+    age: 44,
+    gender: "Erkek",
+    subjects: ["Bilişim Teknolojileri", "Mobil Uygulama Geliştirme"],
+    years_of_experience: 19,
+    email: "sinan.vural@garemtal.meb.k12.tr",
+    phone: "+90 555 100 0010",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 11,
+    name: "Celil ÖZTÜRK",
+    age: 41,
+    gender: "Erkek",
+    subjects: ["Bilişim Teknolojileri", "Yazılım Geliştirme"],
+    years_of_experience: 17,
+    email: "celil.ozturk@garemtal.meb.k12.tr",
+    phone: "+90 555 100 0011",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 12,
+    name: "Barış BOZAN",
+    age: 36,
+    gender: "Erkek",
+    subjects: ["Bilişim Teknolojileri", "Siber Güvenlik"],
+    years_of_experience: 13,
+    email: "baris.bozan@garemtal.meb.k12.tr",
+    phone: "+90 555 100 0012",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 13,
+    name: "Güneş PARLAKGÜN",
+    age: 32,
+    gender: "Kadın",
+    subjects: ["Bilişim Teknolojileri", "Yazılım Geliştirme"],
+    years_of_experience: 9,
+    email: "gunes.parlakgun@garemtal.meb.k12.tr",
+    phone: "+90 555 100 0013",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 14,
+    name: "Esra EREN",
+    age: 35,
+    gender: "Kadın",
+    subjects: ["Grafik Tasarım", "Web Tasarım"],
+    years_of_experience: 12,
+    email: "esra.eren@garemtal.meb.k12.tr",
+    phone: "+90 555 100 0014",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 15,
+    name: "Emine GÖKMENER DİKBIYIK",
+    age: 45,
+    gender: "Kadın",
+    subjects: ["Bilişim Teknolojileri", "Yazılım Geliştirme"],
+    years_of_experience: 20,
+    email: "emine.gokmener@garemtal.meb.k12.tr",
+    phone: "+90 555 100 0015",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 16,
+    name: "Hüseyin İNCİR",
+    age: 48,
+    gender: "Erkek",
+    subjects: ["Bilişim Teknolojileri", "Yazılım Geliştirme"],
+    years_of_experience: 23,
+    email: "huseyin.incir@garemtal.meb.k12.tr",
+    phone: "+90 555 100 0016",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 17,
+    name: "İlkay KEFELİ",
+    age: 39,
+    gender: "Kadın",
+    subjects: ["Bilişim Teknolojileri", "Yazılım Geliştirme"],
+    years_of_experience: 16,
+    email: "ilkay.kefeli@garemtal.meb.k12.tr",
+    phone: "+90 555 100 0017",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 18,
+    name: "Gökhan SIRMA",
+    age: 41,
+    gender: "Erkek",
+    subjects: ["Bilişim Teknolojileri", "Yazılım Geliştirme"],
+    years_of_experience: 18,
+    email: "gokhan.sirma@garemtal.meb.k12.tr",
+    phone: "+90 555 100 0018",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 19,
+    name: "Emel PÜLENT",
+    age: 37,
+    gender: "Kadın",
+    subjects: ["Halkla İlişikiler", "Organizasyon"],
+    years_of_experience: 14,
+    email: "emel.pulent@garemtal.meb.k12.tr",
+    phone: "+90 555 100 0019",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 20,
+    name: "F. Aslı TABAN",
+    age: 40,
+    gender: "Kadın",
+    subjects: ["Halkla İlişikiler", "Reklamcılık"],
+    years_of_experience: 17,
+    email: "asli.taban@garemtal.meb.k12.tr",
+    phone: "+90 555 100 0020",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 21,
+    name: "Gökhan GÜNGÖR",
+    age: 43,
+    gender: "Erkek",
+    subjects: ["Halkla İlişikiler", "Organizasyon"],
+    years_of_experience: 19,
+    email: "gokhan.gungor@garemtal.meb.k12.tr",
+    phone: "+90 555 100 0021",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 22,
+    name: "Yunus Kaan ÖZKAN",
+    age: 34,
+    gender: "Erkek",
+    subjects: ["Halkla İlişikiler", "Reklamcılık"],
+    years_of_experience: 11,
+    email: "yunus.kaan@garemtal.meb.k12.tr",
+    phone: "+90 555 100 0022",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 1,
+    name: "Gülay Tokgöz",
+    age: 29,
+    gender: "Kadın",
+    subjects: ["Edebiyat"],
+    years_of_experience: 3,
+    email: "gulay.tokgöz@okul.edu",
+    phone: "+90 553 700 1315",
+    address: {
+      city: "Adana",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 23,
+    name: "Nazife Kaçar",
+    age: 29,
+    gender: "Kadın",
+    subjects: ["Edebiyat"],
+    years_of_experience: 3,
+    email: "nazife.kaçar@okul.edu",
+    phone: "+90 553 314 5010",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 24,
+    name: "Özlem Çuhadar",
+    age: 25,
+    gender: "Kadın",
+    subjects: ["Edebiyat"],
+    years_of_experience: 3,
+    email: "özlem.çuhadar@okul.edu",
+    phone: "+90 553 314 5010",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 25,
+    name: "Faysal Macit",
+    age: 30,
+    gender: "Erkek",
+    subjects: ["Edebiyat"],
+    years_of_experience: 3,
+    email: "faysal.macit@okul.edu",
+    phone: "+90 530 401 1012",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 26,
+    name: "Dilek Erbil",
+    age: 40,
+    gender: "Kadın",
+    subjects: ["Edebiyat"],
+    years_of_experience: 3,
+    email: "dilek.erbil@okul.edu",
+    phone: "+90 530 502 1112",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 27,
+    name: "Işık Kutlu Çalışkan",
+    age: 30,
+    gender: "Kadın",
+    subjects: ["Matematik"],
+    years_of_experience: 3,
+    email: "ışıkutu.çalışkan@okul.edu",
+    phone: "+90 530 023 0024",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 28,
+    name: "Züleyha Atmaca",
+    age: 27,
+    gender: "Kadın",
+    subjects: ["Tarih"],
+    years_of_experience: 3,
+    email: "züleyha.atmaca@okul.edu",
+    phone: "+90 544 720 6445",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 29,
+    name: "Zehra Taşçı",
+    age: 27,
+    gender: "Kadın",
+    subjects: ["Tarih"],
+    years_of_experience: 3,
+    email: "zehra.taşçı@okul.edu",
+    phone: "+90 530 200 0305",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 30,
+    name: "Nejla Yılmaz",
+    age: 27,
+    gender: "Kadın",
+    subjects: ["Coğrafya"],
+    years_of_experience: 3,
+    email: "nejla.yılmaz@okul.edu",
+    phone: "+90 530 035 6023",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 31,
+    name: "Serpil Gültepe",
+    age: 30,
+    gender: "Kadın",
+    subjects: ["Fizik"],
+    years_of_experience: 3,
+    email: "serpil.gültepe@okul.edu",
+    phone: "+90 530 035 6023",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 32,
+    name: "Seda Saygın",
+    age: 27,
+    gender: "Kadın",
+    subjects: ["Kimya"],
+    years_of_experience: 3,
+    email: "seda.saygın@okul.edu",
+    phone: "+90 530 08 1861",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 33,
+    name: "Engin Keklik",
+    age: 27,
+    gender: "Erkek",
+    subjects: ["Biyoloji"],
+    years_of_experience: 3,
+    email: "engin.keklik@okul.edu",
+    phone: "+90 530 20 4975",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 34,
+    name: "Hande Fatma Ocak",
+    age: 25,
+    gender: "Kadın",
+    subjects: ["ingilizce"],
+    years_of_experience: 3,
+    email: "handefatma.ocak@okul.edu",
+    phone: "+90 530 035 6023",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 35,
+    name: "Elif Turan",
+    age: 27,
+    gender: "Kadın",
+    subjects: ["İngilizce"],
+    years_of_experience: 3,
+    email: "elif.turan@okul.edu",
+    phone: "+90 530 035 6023",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 36,
+    name: "Hatice Handan Şimşek",
+    age: 40,
+    gender: "Kadın",
+    subjects: ["Felsefe"],
+    years_of_experience: 3,
+    email: "haticehandan.simsek@okul.edu",
+    phone: "+90 530 502 3052",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 37,
+    name: "Muteber Demirkale",
+    age: 30,
+    gender: "Kadın",
+    subjects: ["Beden Eğitimi"],
+    years_of_experience: 3,
+    email: "muteber.demirkale@okul.edu",
+    phone: "+90 530 410 3589",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 38,
+    name: "Süheyla Subay",
+    age: 40,
+    gender: "Kadın",
+    subjects: ["Müzik"],
+    years_of_experience: 3,
+    email: "süheyla.subay@okul.edu",
+    phone: "+90 533 360 7216",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 39,
+    name: "Esma Kaymak",
+    age: 30,
+    gender: "Kadın",
+    subjects: ["Din Kült. ve Ahl.Bil."],
+    years_of_experience: 3,
+    email: "esma.kaymak@okul.edu",
+    phone: "+90 530 035 6023",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 40,
+    name: "Hasan Yeşilyurt",
+    age: 40,
+    gender: "Erkek",
+    subjects: ["Din Kült. ve Ahl.Bil."],
+    years_of_experience: 3,
+    email: "hasan.yeşilyurt@okul.edu",
+    phone: "+90 530 348 1585",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 41,
+    name: "Sonül Ataç",
+    age: 30,
+    gender: "Kadın",
+    subjects: ["Psikolojik Danışman"],
+    years_of_experience: 3,
+    email: "songül.ataç@okul.edu",
+    phone: "+90 530 862 1284",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+  {
+    id: 42,
+    name: "Hilal Akşahin Kaplan",
+    age: 27,
+    gender: "Kadın",
+    subjects: ["Memur"],
+    years_of_experience: 3,
+    email: "hilalakşahin.kaplan@okul.edu",
+    phone: "+90 530 450 4215",
+    address: {
+      city: "İstanbul",
+      country: "Türkiye"
+    }
+  },
+];
+
 const App = () => {
   const { theme } = useTheme();
   const [arananKelime, setArananKelime] = useState('');
   const [gorunanModul, setGorunanModul] = useState(false);
   const [kutuSec, setKutuSec] = useState(null);
   const [teachers, setTeachers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false); // Artık yükleme yapmayacağız
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchTeachers();
+    // API çağrısı yerine mock verileri kullanıyoruz
+    setTeachers(mockTeachers);
   }, []);
-
-  const fetchTeachers = async () => {
-    try {
-      const response = await fetch('https://www.freetestapi.com/api/v1/teachers');
-      if (!response.ok) {
-        throw new Error('Veri çekilemedi');
-      }
-      const data = await response.json();
-      setTeachers(data);
-    } catch (err) {
-      setError('Öğretmen bilgileri yüklenirken bir hata oluştu');
-      console.error('Hata:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const filteredData = teachers.filter(item =>
     item.name.toLowerCase().includes(arananKelime.toLowerCase())
@@ -44,26 +635,11 @@ const App = () => {
     setGorunanModul(true);
   };
 
-  if (loading) {
-    return (
-      <View style={[styles.container, styles.centerContent, { backgroundColor: theme.colors.background }]}>
-        <ActivityIndicator size="large" color={theme.colors.text} />
-        <Text style={[styles.loadingText, { color: theme.colors.text }]}>Öğretmenler yükleniyor...</Text>
-      </View>
-    );
-  }
-
   if (error) {
     return (
       <View style={[styles.container, styles.centerContent, { backgroundColor: theme.colors.background }]}>
         <Ionicons name="alert-circle" size={50} color={theme.colors.text} />
         <Text style={[styles.errorText, { color: theme.colors.text }]}>{error}</Text>
-        <TouchableOpacity 
-          style={[styles.retryButton, { backgroundColor: theme.colors.card }]}
-          onPress={fetchTeachers}
-        >
-          <Text style={[styles.retryButtonText, { color: theme.colors.text }]}>Tekrar Dene</Text>
-        </TouchableOpacity>
       </View>
     );
   }
@@ -177,6 +753,7 @@ const App = () => {
   );
 };
 
+// Stil tanımları aynı şekilde kalabilir
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -185,98 +762,85 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  loadingText: {
-    marginTop: 20,
-    fontSize: 16,
-    fontWeight: '600',
-  },
   errorText: {
     marginTop: 20,
     fontSize: 16,
     textAlign: 'center',
     paddingHorizontal: 20,
   },
-  retryButton: {
-    marginTop: 20,
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 8,
-  },
-  retryButtonText: {
-    fontSize: 16,
-    fontWeight: '600',
-  },
+
   header: {
     padding: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: '#e9ecef',
+    paddingTop: 40,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    marginBottom: 20,
   },
   headerTitle: {
-    fontSize: 28,
-    fontWeight: '700',
-    marginBottom: 5,
+    fontSize: 24,
+    fontWeight: 'bold',
   },
   headerSubtitle: {
-    fontSize: 16,
+    fontSize: 14,
+    marginTop: 5,
   },
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    margin: 15,
     paddingHorizontal: 15,
-    borderRadius: 12,
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    marginHorizontal: 20,
+    borderRadius: 10,
+    marginBottom: 20,
   },
   searchIcon: {
     marginRight: 10,
   },
   input: {
     flex: 1,
-    height: 50,
-    fontSize: 16,
+    height: 40,
+    borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 10,
   },
   listContainer: {
-    padding: 10,
+    paddingHorizontal: 10,
   },
-  cardWrapper: {
-    flex: 1,
-    padding: 5,
-  },
-  card: {
-    flex: 1,
-    padding: 15,
-    borderRadius: 15,
-    alignItems: 'center',
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-  },
-  avatarContainer: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 10,
-  },
-  cardTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    textAlign: 'center',
-    marginBottom: 5,
-  },
-  cardDescription: {
-    fontSize: 12,
-    textAlign: 'center',
-  },
+      cardWrapper: {
+        width: width / 2 - 20,
+        padding: 10,
+    },
+    card: {
+        borderRadius: 10,
+        padding: 15,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 3,
+        height: 180, // Sabit yükseklik
+        justifyContent: 'center', // İçerikleri dikeyde ortala
+    },
+    avatarContainer: {
+        width: 50,
+        height: 50,
+        borderRadius: 25,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 10,
+    },
+    cardTitle: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginBottom: 5,
+        flexShrink: 1, // Uzun metinlerde küçülme
+    },
+    cardDescription: {
+        fontSize: 14,
+        textAlign: 'center',
+        flexShrink: 1, // Uzun metinlerde küçülme
+    },
   modalOverlay: {
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -294,26 +858,25 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingBottom: 15,
     borderBottomWidth: 1,
+    marginBottom: 15,
   },
   modalTitle: {
-    fontSize: 24,
-    fontWeight: '700',
+    fontSize: 20,
+    fontWeight: 'bold',
   },
   closeIcon: {
     padding: 5,
   },
   modalContent: {
-    alignItems: 'center',
-    paddingTop: 20,
+    flexDirection: 'row',
   },
   teacherInfo: {
-    width: '100%',
-    marginTop: 20,
+    flex: 1,
+    marginLeft: 20,
   },
   infoLabel: {
     fontSize: 14,
     marginTop: 10,
-    marginBottom: 2,
   },
   infoValue: {
     fontSize: 16,

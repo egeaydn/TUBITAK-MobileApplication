@@ -51,8 +51,9 @@ export default function Screen1({ navigation }) {
   return (
     <ScrollView 
       style={[styles.container, { backgroundColor: theme.colors.background }]}
-      showsVerticalScrollIndicator={false}
+      
     >
+    <View>
       <View style={[styles.header, { 
         backgroundColor: theme.colors.card,
         borderBottomColor: theme.colors.border 
@@ -81,6 +82,7 @@ export default function Screen1({ navigation }) {
             />
           </Animatable.View>
         ))}
+      </View>
       </View>
     </ScrollView>
   );
